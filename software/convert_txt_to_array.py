@@ -3,9 +3,9 @@ import socket
 
 with open('test_acc_value.txt','r') as filestream:
 
-	for line in filestream:
-		currentline = line.split(',')
-		print(currentline)
+    for line in filestream:
+        currentline = line.split(',')
+        print(currentline)
 
 
 
