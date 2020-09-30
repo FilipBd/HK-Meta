@@ -24,7 +24,7 @@
 // The IP address will be dependent on your local network:
 byte mac[] = {  
   0xA8, 0x61, 0x0A, 0xAE, 0x85, 0x83 };
-IPAddress ip(169,254,52,219);
+IPAddress ip(169,254,170,171);
 
 unsigned int localPort = 8888;              // local port to listen on
 
