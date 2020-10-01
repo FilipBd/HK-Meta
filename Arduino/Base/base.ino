@@ -141,8 +141,8 @@ float sensor_read(){
 }
 
 
-float controler(float DCS_value, float sensor_value){
-    //take in dcs value, sensor and calc controll
+float controller(float DCS_value, float sensor_value){
+    //take in dcs value, sensor and calc control
     //Serial.println("controll call workes");
 
     float val = (DCS_value - sensor_value)*127;
@@ -180,5 +180,5 @@ void loop() {
   Serial.println(G_force);
   ax, ay, az = sensor_read();
 
-  controler(G_force, ax);
+  controller(G_force, ax);
 }
