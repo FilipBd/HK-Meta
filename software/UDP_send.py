@@ -1,6 +1,6 @@
 import socket
 import numpy as np
-UDP_IP = '169.254.170.171'
+UDP_IP = '169.254.212.11'
 UDP_PORT = 8888
 #MESSAGE = "Hello, World!"
 

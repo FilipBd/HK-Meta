@@ -13,9 +13,9 @@ def degree2rad(degree):
 
 #tourqe = 10.5
 #rpm = 9000
-r_platform = 0.85
-mass = 300
-angle = 45
+r_platform = 0.70
+mass = 150
+angle = 35
 r_pully = 0.05
 
 degree_acc = 200									#degree/sec^2
