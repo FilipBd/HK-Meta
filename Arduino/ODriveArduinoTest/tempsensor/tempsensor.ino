@@ -1,4 +1,4 @@
-const int temppin = 0; // tempsensor
+const int temppin = 0; // tempsensor A0
 int16_t tempval = 0;
 
 void setup(void) {
