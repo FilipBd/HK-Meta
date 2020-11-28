@@ -21,6 +21,13 @@ const int temp_2 = 1; // pin A1
 int16_t tempval_1 = 0;
 int16_t tempval_2 = 0;
 
+// Fans
+const int fan_1 = 5; // pin D5
+const int fan_2 = 6; // pin D6
+const int small_fan = 11; // pin D11
+const int big_fan = 3; // pin D3
+int big_fan_val = 0;
+
 //Initialize variables/Ip/Mac etc.
 //Variables-----------------------------
 float G_force;
@@ -79,7 +86,61 @@ void tempsensors_func() {
   tempval_1 = map(tempval_1, 687.3, 2839.70, -70, 500);
   tempval_2 = analogRead(temp_2);
   tempval_2 = map(tempval_1, 687.3, 2839.70, -70, 500);
-  // control fans
+  
+  // control fan 1
+  if (tempval_1 >= 20){
+    analogWrite(fan_1, 63); // 25% duty cycle
+    big_fan_val = 63;
+  }
+  else if (tempval_1 >= 40){
+    analogWrite(fan_1, 127); // 50% duty cycle
+    big_fan_val = 127;
+  }
+  else if (tempval_1 >= 60){
+    analogWrite(fan_1, 190); // 90% duty cycle
+    big_fan_val = 190;
+  }
+  else if (tempval_1 >= 80){
+    analogWrite(fan_1, 255); // 100% duty cycle
+    big_fan_val = 255;
+  }
+  else {
+    analogWrite(fan_1, 0); // safe!
+    big_fan_val = 0;
+  }
+
+  // control fan 2
+  if (tempval_2 >= 20){
+    analogWrite(fan_2, 63); // 25% duty cycle
+    if (big_fan_val < 63){
+      big_fan_val = 63;
+    }
+  }
+  else if (tempval_2 >= 40){
+    analogWrite(fan_2, 127); // 50% duty cycle
+    if (big_fan_val < 127){
+      big_fan_val = 127;
+    }
+  }
+  else if (tempval_2 >= 60){
+    analogWrite(fan_2, 190); // 90% duty cycle
+    if (big_fan_val < 190){
+      big_fan_val = 190;
+    }
+  }
+  else if (tempval_2 >= 80){
+    analogWrite(fan_2, 255); // 100% duty cycle
+    if (big_fan_val < 255){
+      big_fan_val = 255;
+    }
+  }
+  else {
+    analogWrite(fan_2, 0); // safe!
+    if (big_fan_val < 63){
+      big_fan_val = 0;
+    }
+  }
+  analogWrite(big_fan, big_fan_val);
   
   delay(50);
 }
@@ -120,7 +181,7 @@ int emergency_stop_func(){ //NEEDS WORK
       emergency = false;
       break;
     }
-    else Emergency_Stop();
+    else emergency_stop_func();
     delay(1000);
    }
 }
@@ -191,7 +252,7 @@ void loop() {
     emergency == true;
   }
   while(digitalRead(emergency_button) == HIGH){
-    Emergency_Stopp();
+    emergency_stop_func();
     }
   if(millis() - tim >= per){
     tim = millis();
